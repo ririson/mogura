@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>もぐらたたきゲーム</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script>
+// すべてが読み込まれたあとに発動する
+window.onload = function() {
+
+	// BOXのIDの配列をつくる
+	var boxIds = ['box1','box2','box3','box4','box5','box6','box7','box8','box9'];
+
+	// もぐらを出現させる関数
+	function showTarget() {
+		// 0以上1未満の小数の乱数を取得してそれが0.2(20%)以下の確率で出現させる
+		if (Math.random() < 0.2) {
+			// 0以上1未満の小数の乱数を取得するとき配列の要素IDを指定したいので配列の要素数を掛けて整数の最大値を取得
+			var box = document.getElementById(boxIds[Math.floor(Math.random()*boxIds.length)]);
+			// まだもぐらが出現していないBOXならもぐらを出現させる
+			if (box.innerHTML == '') {
+				box.innerHTML = "<img src='images/mogura.png' id='mogura'>";
+				// 1000ミリ秒(1秒)出現させたらもぐらを隠す関数を呼び出す
+				setTimeout(function(){ hideTarget(box); }, 1000);
+			}
+		}
+	}
+
+	// 出現させたもぐらを隠す関数
+	function hideTarget(box) {
+		box.innerHTML = '';
+	}
+
+	// メッセージを表示する関数
+	function showMessage(e) {
+		if (e.target.id == 'mogura') {
+			document.getElementById('message').innerHTML = '◯ もぐらをたたいた！';
+			e.target.innerHTML = '';
+		} else {
+			document.getElementById('message').innerHTML = '× miss';
+		}
+	}
+
+	// もぐらをたたいたときにメッセージを表示する関数を呼び出す
+	document.getElementById('box1').addEventListener('click', showMessage);
+	document.getElementById('box2').addEventListener('click', showMessage);
+	document.getElementById('box3').addEventListener('click', showMessage);
+	document.getElementById('box4').addEventListener('click', showMessage);
+	document.getElementById('box5').addEventListener('click', showMessage);
+	document.getElementById('box6').addEventListener('click', showMessage);
+	document.getElementById('box7').addEventListener('click', showMessage);
+	document.getElementById('box8').addEventListener('click', showMessage);
+	document.getElementById('box9').addEventListener('click', showMessage);
+
+	// もぐらを出現させる関数を100ミリ秒(0.1秒)ごとに呼び出す
+	setInterval(showTarget, 100);
+}
+</script>
+</head>
+<body>
+	<div id='game-container'>
+		<h1>もぐらたたきゲーム</h1>
+		<div id='game'>
+			<h2>すばしっこく動くもぐらをたたけ！</h2>
+			<table>
+				<tbody>
+					<tr>
+						<td class="box" id="box1"></td>
+						<td class="box" id="box2"></td>
+						<td class="box" id="box3"></td>
+					</tr>
+					<tr>
+						<td class="box" id="box4"></td>
+						<td class="box" id="box5"></td>
+						<td class="box" id="box6"></td>
+					</tr>
+					<tr>
+						<td class="box" id="box7"></td>
+						<td class="box" id="box8"></td>
+						<td class="box" id="box9"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="message"></div>
+		</div>
+	</div>
+</body>
+</html>
+
