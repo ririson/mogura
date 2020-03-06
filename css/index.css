@@ -52,12 +52,12 @@ td {
 	border: 1px solid #ccc;
 	text-align:center;
 }
-img#mogura {
+img.mogura {
 	width: calc(100px - 6px);
 	display: block;
 	margin: 0 auto;
 }
-img#mogura:hover {
+img.mogura:hover {
 	cursor: pointer;
 }
 #message {

@@ -20,7 +20,7 @@ window.onload = function() {
 			var box = document.getElementById(boxIds[Math.floor(Math.random()*boxIds.length)]);
 			// まだもぐらが出現していないBOXならもぐらを出現させる
 			if (box.innerHTML == '') {
-				box.innerHTML = "<img src='images/mogura.png' id='mogura'>";
+				box.innerHTML = "<img src='images/mogura.png' class='mogura'>";
 				// 1000ミリ秒(1秒)出現させたらもぐらを隠す関数を呼び出す
 				setTimeout(function(){ hideTarget(box); }, 1000);
 			}
@@ -34,7 +34,7 @@ window.onload = function() {
 
 	// メッセージを表示する関数
 	function showMessage(e) {
-		if (e.target.id == 'mogura') {
+		if (e.target.className == 'mogura') {
 			document.getElementById('message').innerHTML = '◯ もぐらをたたいた！';
 			e.target.innerHTML = '';
 		} else {
@@ -43,15 +43,10 @@ window.onload = function() {
 	}
 
 	// もぐらをたたいたときにメッセージを表示する関数を呼び出す
-	document.getElementById('box1').addEventListener('click', showMessage);
-	document.getElementById('box2').addEventListener('click', showMessage);
-	document.getElementById('box3').addEventListener('click', showMessage);
-	document.getElementById('box4').addEventListener('click', showMessage);
-	document.getElementById('box5').addEventListener('click', showMessage);
-	document.getElementById('box6').addEventListener('click', showMessage);
-	document.getElementById('box7').addEventListener('click', showMessage);
-	document.getElementById('box8').addEventListener('click', showMessage);
-	document.getElementById('box9').addEventListener('click', showMessage);
+	var targets = document.getElementsByClassName('box')
+	for(var i = 0; i < targets.length; i++) {
+		targets[i].addEventListener('click', showMessage);
+	}
 
 	// もぐらを出現させる関数を100ミリ秒(0.1秒)ごとに呼び出す
 	setInterval(showTarget, 100);
